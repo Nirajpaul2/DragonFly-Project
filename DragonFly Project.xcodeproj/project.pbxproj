@@ -18,6 +18,10 @@
 		C885E9421FA45540006F1435 /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E9411FA45540006F1435 /* NetworkCalls.swift */; };
 		C885E9441FA45BDD006F1435 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C885E9431FA45BDD006F1435 /* Default-568h@2x.png */; };
 		C885E9461FA484DC006F1435 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E9451FA484DC006F1435 /* EventTableViewCell.swift */; };
+		C885E9491FA4AF82006F1435 /* ScrollableBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E9471FA4AF81006F1435 /* ScrollableBottomSheetViewController.swift */; };
+		C885E94A1FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */; };
+		C885E94D1FA4B059006F1435 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */; };
+		C885E94E1FA4B059006F1435 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		C885E9411FA45540006F1435 /* NetworkCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
 		C885E9431FA45BDD006F1435 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C885E9451FA484DC006F1435 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		C885E9471FA4AF81006F1435 /* ScrollableBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableBottomSheetViewController.swift; sourceTree = "<group>"; };
+		C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableBottomSheetViewController.xib; sourceTree = "<group>"; };
+		C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,8 @@
 		C885E9271FA44F24006F1435 /* DragonFly Project */ = {
 			isa = PBXGroup;
 			children = (
+				C885E9471FA4AF81006F1435 /* ScrollableBottomSheetViewController.swift */,
+				C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */,
 				C885E9281FA44F24006F1435 /* AppDelegate.swift */,
 				C885E92D1FA44F24006F1435 /* MasterViewController.swift */,
 				C885E92F1FA44F24006F1435 /* DetailViewController.swift */,
@@ -91,6 +101,8 @@
 				C885E92A1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld */,
 				C885E9411FA45540006F1435 /* NetworkCalls.swift */,
 				C885E9451FA484DC006F1435 /* EventTableViewCell.swift */,
+				C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */,
+				C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */,
 			);
 			path = "DragonFly Project";
 			sourceTree = "<group>";
@@ -166,9 +178,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C885E9381FA44F24006F1435 /* LaunchScreen.storyboard in Resources */,
+				C885E94A1FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib in Resources */,
 				C885E9441FA45BDD006F1435 /* Default-568h@2x.png in Resources */,
 				C885E9351FA44F24006F1435 /* Assets.xcassets in Resources */,
 				C885E9331FA44F24006F1435 /* Main.storyboard in Resources */,
+				C885E94E1FA4B059006F1435 /* CommentsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,12 +251,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C885E9491FA4AF82006F1435 /* ScrollableBottomSheetViewController.swift in Sources */,
 				C885E9461FA484DC006F1435 /* EventTableViewCell.swift in Sources */,
 				C885E92C1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld in Sources */,
 				C885E9291FA44F24006F1435 /* AppDelegate.swift in Sources */,
 				C885E92E1FA44F24006F1435 /* MasterViewController.swift in Sources */,
 				C885E9301FA44F24006F1435 /* DetailViewController.swift in Sources */,
 				C885E9421FA45540006F1435 /* NetworkCalls.swift in Sources */,
+				C885E94D1FA4B059006F1435 /* CommentsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

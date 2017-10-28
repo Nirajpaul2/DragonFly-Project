@@ -15,8 +15,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var managedObjectContext: NSManagedObjectContext? = nil
     
     var eventArray:NSArray = []
+    var eventImage:UIImage = UIImage()
+    
     let networkCall = NetworkCalls()
     var cellImage:[UIImage] = []
+    var event:NSDictionary = NSDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +61,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
+            let secondaryAsNavController:UINavigationController = (segue.destination as? UINavigationController)!
+            let destinationVC = secondaryAsNavController.topViewController as? DetailViewController
             
+            destinationVC?.event = event
+            destinationVC?.eventImage = eventImage
         }
     }
     
@@ -98,6 +105,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 400.0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        event = eventArray[indexPath.row] as! NSDictionary
+        eventImage = cellImage[indexPath.row]
     }
 }
 
