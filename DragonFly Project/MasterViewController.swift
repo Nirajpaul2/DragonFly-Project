@@ -11,7 +11,6 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
     var eventArray:NSArray = []
@@ -47,11 +46,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        super.viewWillAppear(animated)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,10 +54,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            let secondaryAsNavController:UINavigationController = (segue.destination as? UINavigationController)!
-            let destinationVC = secondaryAsNavController.topViewController as? DetailViewController
-            
+        if segue.identifier == "showEvent" {
+            let destinationVC = segue.destination as? DetailViewController
             destinationVC?.event = event
             destinationVC?.eventImage = eventImage
         }
@@ -104,12 +96,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400.0
+        return 520.0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         event = eventArray[indexPath.row] as! NSDictionary
         eventImage = cellImage[indexPath.row]
+        performSegue(withIdentifier: "showEvent", sender: self)
     }
 }
 
