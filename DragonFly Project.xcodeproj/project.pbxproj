@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5428799B8864EABD5F5F26EA /* Pods_DragonFly_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6738E16DE73BF28E1685169 /* Pods_DragonFly_Project.framework */; };
 		C885E9291FA44F24006F1435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E9281FA44F24006F1435 /* AppDelegate.swift */; };
 		C885E92C1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C885E92A1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld */; };
 		C885E92E1FA44F24006F1435 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E92D1FA44F24006F1435 /* MasterViewController.swift */; };
@@ -14,9 +15,14 @@
 		C885E9331FA44F24006F1435 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C885E9311FA44F24006F1435 /* Main.storyboard */; };
 		C885E9351FA44F24006F1435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C885E9341FA44F24006F1435 /* Assets.xcassets */; };
 		C885E9381FA44F24006F1435 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C885E9361FA44F24006F1435 /* LaunchScreen.storyboard */; };
+		C885E9421FA45540006F1435 /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E9411FA45540006F1435 /* NetworkCalls.swift */; };
+		C885E9441FA45BDD006F1435 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C885E9431FA45BDD006F1435 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		492811FAC150FB3CE3B3E2AB /* Pods-DragonFly Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DragonFly Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project.release.xcconfig"; sourceTree = "<group>"; };
+		658C6740A768A348B02744C9 /* Pods-DragonFly Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DragonFly Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project.debug.xcconfig"; sourceTree = "<group>"; };
+		A6738E16DE73BF28E1685169 /* Pods_DragonFly_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DragonFly_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C885E9251FA44F24006F1435 /* DragonFly Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DragonFly Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C885E9281FA44F24006F1435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C885E92B1FA44F24006F1435 /* DragonFly_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DragonFly_Project.xcdatamodel; sourceTree = "<group>"; };
@@ -26,6 +32,8 @@
 		C885E9341FA44F24006F1435 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C885E9371FA44F24006F1435 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C885E9391FA44F24006F1435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C885E9411FA45540006F1435 /* NetworkCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
+		C885E9431FA45BDD006F1435 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +41,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5428799B8864EABD5F5F26EA /* Pods_DragonFly_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81E1DF6D964D953BEAA5979F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				658C6740A768A348B02744C9 /* Pods-DragonFly Project.debug.xcconfig */,
+				492811FAC150FB3CE3B3E2AB /* Pods-DragonFly Project.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C885E91C1FA44F24006F1435 = {
 			isa = PBXGroup;
 			children = (
+				C885E9431FA45BDD006F1435 /* Default-568h@2x.png */,
 				C885E9271FA44F24006F1435 /* DragonFly Project */,
 				C885E9261FA44F24006F1435 /* Products */,
+				81E1DF6D964D953BEAA5979F /* Pods */,
+				E7EDA313FC46784A252A3CC8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,8 +87,17 @@
 				C885E9361FA44F24006F1435 /* LaunchScreen.storyboard */,
 				C885E9391FA44F24006F1435 /* Info.plist */,
 				C885E92A1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld */,
+				C885E9411FA45540006F1435 /* NetworkCalls.swift */,
 			);
 			path = "DragonFly Project";
+			sourceTree = "<group>";
+		};
+		E7EDA313FC46784A252A3CC8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6738E16DE73BF28E1685169 /* Pods_DragonFly_Project.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C885E93C1FA44F24006F1435 /* Build configuration list for PBXNativeTarget "DragonFly Project" */;
 			buildPhases = (
+				F7BAFAAD1F8EF5AC745F3017 /* [CP] Check Pods Manifest.lock */,
 				C885E9211FA44F24006F1435 /* Sources */,
 				C885E9221FA44F24006F1435 /* Frameworks */,
 				C885E9231FA44F24006F1435 /* Resources */,
+				82C1391428B6004B4A8AAC7F /* [CP] Embed Pods Frameworks */,
+				B2FE049FA895768FA10498F4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +163,69 @@
 			buildActionMask = 2147483647;
 			files = (
 				C885E9381FA44F24006F1435 /* LaunchScreen.storyboard in Resources */,
+				C885E9441FA45BDD006F1435 /* Default-568h@2x.png in Resources */,
 				C885E9351FA44F24006F1435 /* Assets.xcassets in Resources */,
 				C885E9331FA44F24006F1435 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82C1391428B6004B4A8AAC7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2FE049FA895768FA10498F4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7BAFAAD1F8EF5AC745F3017 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DragonFly Project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C885E9211FA44F24006F1435 /* Sources */ = {
@@ -146,6 +236,7 @@
 				C885E9291FA44F24006F1435 /* AppDelegate.swift in Sources */,
 				C885E92E1FA44F24006F1435 /* MasterViewController.swift in Sources */,
 				C885E9301FA44F24006F1435 /* DetailViewController.swift in Sources */,
+				C885E9421FA45540006F1435 /* NetworkCalls.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +371,7 @@
 		};
 		C885E93D1FA44F24006F1435 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 658C6740A768A348B02744C9 /* Pods-DragonFly Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -295,6 +387,7 @@
 		};
 		C885E93E1FA44F24006F1435 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 492811FAC150FB3CE3B3E2AB /* Pods-DragonFly Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
