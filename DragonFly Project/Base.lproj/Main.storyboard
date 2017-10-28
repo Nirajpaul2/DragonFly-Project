@@ -111,6 +111,9 @@
                                                         <state key="normal" title="Add Calendar Event">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="addEvent:" destination="JEX-9P-axG" eventType="touchUpInside" id="UkL-sB-MSH"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7o-Y6-f66">
                                                         <rect key="frame" x="183.5" y="0.0" width="175.5" height="30"/>
@@ -118,6 +121,9 @@
                                                         <state key="normal" title="Respond">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="respondToEvent:" destination="JEX-9P-axG" eventType="touchUpInside" id="ebe-5U-LPP"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -183,6 +189,7 @@
                         <outlet property="eventLocation" destination="GjV-gr-bk8" id="csk-Wp-Swt"/>
                         <outlet property="eventName" destination="Cx8-OG-JXM" id="O9f-cu-WOl"/>
                         <outlet property="mapVIew" destination="dGu-eb-qT5" id="cZJ-bG-crz"/>
+                        <outlet property="respondToEvent" destination="M7o-Y6-f66" id="WFi-Om-iR1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
