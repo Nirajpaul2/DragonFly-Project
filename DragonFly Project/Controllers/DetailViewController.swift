@@ -9,8 +9,9 @@
 import UIKit
 import MapKit
 import EventKit
+import MessageUI
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     var event:Event?
     var eventId:NSString = ""
@@ -214,6 +215,43 @@ class DetailViewController: UIViewController {
         actionSheet.addAction(no)
         
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func sendEmail(_ sender: Any) {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        mailComposerVC.setToRecipients(["prasaadem@tamu.edu"])
+        let subjectString = (event?.name)!+" - "+(event?.date)!
+        mailComposerVC.setSubject(subjectString)
+        let bodyString = "Event Description:\n"+(event?.eventDescription)!+"\n"+"Location: \n"+locationString
+        mailComposerVC.setMessageBody(bodyString, isHTML: false)
+        let imageData: NSData = UIImageJPEGRepresentation(eventImageView.image!, 1)! as NSData
+        mailComposerVC.addAttachmentData(imageData as Data, mimeType: "image/jpeg", fileName: "image")
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let acs: UIAlertController = UIAlertController(title: "Could not send emails from this device", message: "Setup email client in settings", preferredStyle: .actionSheet)
+        
+        let ok = UIAlertAction(title: "Ok", style: .cancel)
+        acs.addAction(ok)
+        
+        self.present(acs, animated: true, completion: nil)
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

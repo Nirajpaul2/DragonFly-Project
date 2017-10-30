@@ -180,7 +180,13 @@
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Event Details" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Event Details" id="mOI-FS-AaM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="RDa-rH-QJZ">
+                            <connections>
+                                <action selector="sendEmail:" destination="JEX-9P-axG" id="MsJ-zR-0rL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="eventDate" destination="OnB-Kz-t5c" id="Rez-bO-tVF"/>
