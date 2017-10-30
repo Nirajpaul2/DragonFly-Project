@@ -37,21 +37,18 @@ class ScrollableBottomSheetViewController: UIViewController {
         prepareBackgroundView()
     }
     
+    //Animation method
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         UIView.animate(withDuration: 0.6, animations: { [weak self] in
             let frame = self?.view.frame
             let yComponent = self?.partialView
             self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
             })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    //MARK: Gesture Recognizer Method
+    //Pan gesture to scroll comments to top
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
         
         let translation = recognizer.translation(in: self.view)
@@ -83,7 +80,7 @@ class ScrollableBottomSheetViewController: UIViewController {
         }
     }
     
-    
+    //UIView preparation and background transparency
     func prepareBackgroundView(){
         let blurEffect = UIBlurEffect.init(style: .dark)
         let visualEffect = UIVisualEffectView.init(effect: blurEffect)
@@ -95,6 +92,7 @@ class ScrollableBottomSheetViewController: UIViewController {
     }
 }
 
+//MARK: Scrollable TableView Delegate and DataSource Methods
 extension ScrollableBottomSheetViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -121,7 +119,6 @@ extension ScrollableBottomSheetViewController: UITableViewDelegate, UITableViewD
 
 extension ScrollableBottomSheetViewController: UIGestureRecognizerDelegate {
 
-    // Solution
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         let gesture = (gestureRecognizer as! UIPanGestureRecognizer)
         let direction = gesture.velocity(in: view).y

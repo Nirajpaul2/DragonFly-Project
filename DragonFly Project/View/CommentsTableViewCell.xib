@@ -20,14 +20,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="114.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYo-Bi-kin">
-                        <rect key="frame" x="16" y="11" width="288" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYo-Bi-kin">
+                        <rect key="frame" x="36" y="11" width="248" height="30"/>
+                        <color key="backgroundColor" red="0.65098039215686276" green="0.81568627450980391" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="H12-bf-Iha"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="OCM-21-3dv">
                         <rect key="frame" x="8" y="46" width="304" height="63.5"/>
@@ -40,11 +47,11 @@
                 <constraints>
                     <constraint firstItem="OCM-21-3dv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="4jZ-US-Xcz"/>
                     <constraint firstItem="OCM-21-3dv" firstAttribute="top" secondItem="VYo-Bi-kin" secondAttribute="bottom" constant="5" id="Kw5-oR-HUN"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="VYo-Bi-kin" secondAttribute="trailing" id="SgA-2j-0aJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="VYo-Bi-kin" secondAttribute="trailing" constant="20" id="SgA-2j-0aJ"/>
                     <constraint firstAttribute="bottom" secondItem="OCM-21-3dv" secondAttribute="bottom" constant="5" id="exA-1D-gNg"/>
                     <constraint firstItem="VYo-Bi-kin" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="poc-j8-1Ps"/>
                     <constraint firstAttribute="trailing" secondItem="OCM-21-3dv" secondAttribute="trailing" constant="8" id="uQk-34-3eb"/>
-                    <constraint firstItem="VYo-Bi-kin" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="vZF-p8-L6I"/>
+                    <constraint firstItem="VYo-Bi-kin" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="vZF-p8-L6I"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -52,7 +59,7 @@
                 <outlet property="commentText" destination="OCM-21-3dv" id="Pec-rN-OMA"/>
                 <outlet property="userName" destination="VYo-Bi-kin" id="dtl-yx-BSe"/>
             </connections>
-            <point key="canvasLocation" x="34" y="135.5"/>
+            <point key="canvasLocation" x="-80" y="-52"/>
         </tableViewCell>
     </objects>
 </document>

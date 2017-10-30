@@ -28,6 +28,15 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var respondToEvent: UIButton!
     
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+    }
+    
+    // MARK: Event Details VC Methods
+    //Load view on viewDidLoad
     func configureView() {
         if (event?.image != nil) {
             if let image = UIImage(data: (event?.image!)! as Data){
@@ -65,11 +74,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         })
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
-    }
-    
+    //Add Comments Section at the bottom
     func addBottomSheetView() {
         let bottomSheetVC = ScrollableBottomSheetViewController()
         
@@ -84,6 +89,8 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         bottomSheetVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
     }
     
+    // MARK: Mapview Method
+    //Load MapView if there is network
     func loadMapView(locationString:String){
         let geoCoder = CLGeocoder()
         
@@ -103,6 +110,8 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         }
     }
     
+    // MARK: Calendar Event Methods
+    //Check for calendar access
     @IBAction func addEvent(_ sender: Any) {
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         
@@ -122,6 +131,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         }
     }
     
+    //Request access to calendar
     func requestAccessToCalendar() {
         eventStore.requestAccess(to: EKEntityType.event, completion: {
             (accessGranted: Bool, error: Error?) in
@@ -131,8 +141,8 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         })
     }
     
+    //Create an event in calendar
     func saveEvent(){
-        print(getCalendar() as Any)
         let newEvent = EKEvent(eventStore: eventStore)
         
         newEvent.calendar = getCalendar()
@@ -165,6 +175,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         }
     }
     
+    //Create/Get Calendar
     func getCalendar() -> EKCalendar? {
         let defaults = UserDefaults.standard
         
@@ -188,6 +199,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         }
     }
     
+    //Respond to Event on user button click
     @IBAction func respondToEvent(_ sender: Any) {
         let actionSheet: UIAlertController = UIAlertController(title: "Would you like to Attend Event?", message: event?.name, preferredStyle: .actionSheet)
         
@@ -217,6 +229,8 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    // MARK: Share via email Action Methods
+    //Send email button action
     @IBAction func sendEmail(_ sender: Any) {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
@@ -226,6 +240,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         }
     }
     
+    //Configure email controller
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
@@ -240,6 +255,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         return mailComposerVC
     }
     
+    //Error message in case of email failure
     func showSendMailErrorAlert() {
         let acs: UIAlertController = UIAlertController(title: "Could not send emails from this device", message: "Setup email client in settings", preferredStyle: .actionSheet)
         
@@ -249,7 +265,7 @@ class DetailViewController: UIViewController, MFMailComposeViewControllerDelegat
         self.present(acs, animated: true, completion: nil)
     }
     
-    // MARK: MFMailComposeViewControllerDelegate Method
+    //MFMailComposeViewControllerDelegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }

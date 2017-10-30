@@ -13,17 +13,15 @@ import AlamofireImage
 import CoreData
 
 let APIROOT:String = "http://dev.dragonflyathletics.com:1337/api/dfkey/"
-let username:String = "anything"
-let password:String = "evalpass"
-
 var events:[Event] = []
 
 class NetworkCalls: NSObject {
     
+    // MARK: Server Calls
+    // Get All Events from server
     func getAllEvents(completionHandler: @escaping (NSArray?, NSError?) -> ()){
         let urlPath:String = APIROOT + "events"
-        
-        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: username, password: password).responseJSON{response in
+        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: userName, password: password).responseJSON{response in
             if (response.result.error == nil){
                 do {
                     if let convertedJsonIntoArray = try JSONSerialization.jsonObject(with: response.data!, options: []) as? NSArray {
@@ -42,10 +40,11 @@ class NetworkCalls: NSObject {
         }
     }
     
+    //Get Image from server
     func getMediaForEvent(eventId:String,mediaId:String,completionHandler: @escaping (UIImage?) -> ()) {
         let urlPath:String = APIROOT + "events/\(eventId)/media/\(mediaId)"
         
-        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: username, password: password).responseImage { response in
+        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: userName, password: password).responseImage { response in
             if response.error == nil {
                 completionHandler(response.result.value)
             }
@@ -55,11 +54,40 @@ class NetworkCalls: NSObject {
         }
     }
     
+    //Get status of event from Server
+    func getStatusOfEvent(eventId:String,completionHandler: @escaping (NSString?, NSError?) -> ()){
+        let urlPath:String = APIROOT + "events/\(eventId)/status/anything)"
+        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: userName, password: password).responseJSON{response in
+            if (response.result.error == nil){
+                do {
+                    completionHandler("success", nil)
+                }
+            }else{
+                completionHandler("error", response.result.error as NSError?)
+            }
+        }
+    }
     
+    //Save status of event to Server
+    func putStatusOfEvent(eventId:String,status:Bool,completionHandler: @escaping (NSString?, NSError?) -> ()){
+        let urlPath:String = APIROOT + "events/\(eventId)/status/anything)"
+        var param = Dictionary<String, Bool>()
+        param["coming"] = status
+        Alamofire.request(urlPath, method: .put, parameters: param, encoding: URLEncoding.default, headers: nil).authenticate(user: userName, password: password).responseJSON{response in
+            if (response.result.error == nil){
+                do {
+                    completionHandler("success", nil)
+                }
+            }else{
+                completionHandler("fail", response.result.error as NSError?)
+            }
+        }
+    }
+    
+    // MARK: Access CoreData
+    //Save events to coredata
     func saveEventsToCoreData(eventsArray:NSArray,completionHandler: @escaping (NSArray?) -> ()){
-        
         deleteAllDataFromCoreData()
-        
         for singleEvent in eventsArray{
             let eventDictionary = singleEvent as! NSDictionary
             guard let appDelegate =
@@ -135,6 +163,7 @@ class NetworkCalls: NSObject {
         }
     }
     
+    //Fetch events from CoreData
     func fetchEventsFromCoreData() -> NSArray{
         var results:NSArray = []
         let fetchRequest:NSFetchRequest<Event> = Event.fetchRequest()
@@ -154,6 +183,7 @@ class NetworkCalls: NSObject {
         return results
     }
     
+    //Get all comments for an event from CoreData
     func getCommentsForEvent(event:Event) -> NSArray{
         var results:NSArray = []
         
@@ -174,7 +204,8 @@ class NetworkCalls: NSObject {
         }
         return results
     }
-
+    
+    //Delete all the entries from the core data Model
     func deleteAllDataFromCoreData(){
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -198,41 +229,9 @@ class NetworkCalls: NSObject {
         }
     }
     
-    func getStatusOfEvent(eventId:String,completionHandler: @escaping (NSString?, NSError?) -> ()){
-        let urlPath:String = APIROOT + "events/\(eventId)/status/anything)"
-        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: username, password: password).responseJSON{response in
-            if (response.result.error == nil){
-                do {
-                    print(response.result.description as Any)
-                    completionHandler("success", nil)
-                }
-            }else{
-                print("error")
-                completionHandler("error", response.result.error as NSError?)
-            }
-        }
-    }
-    
-    func putStatusOfEvent(eventId:String,status:Bool,completionHandler: @escaping (NSString?, NSError?) -> ()){
-        let urlPath:String = APIROOT + "events/\(eventId)/status/anything)"
-        var param = Dictionary<String, Bool>()
-        param["coming"] = status
-        Alamofire.request(urlPath, method: .put, parameters: param, encoding: URLEncoding.default, headers: nil).authenticate(user: username, password: password).responseJSON{response in
-            if (response.result.error == nil){
-                do {
-                    completionHandler("success", nil)
-                }
-            }else{
-                print("error")
-                completionHandler("fail", response.result.error as NSError?)
-            }
-        }
-    }
-    
+    //Update the status of event in CoreData
     func updateStatusForEvent(eventId:String,status:Bool){
-        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
-        
         do{
             guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {

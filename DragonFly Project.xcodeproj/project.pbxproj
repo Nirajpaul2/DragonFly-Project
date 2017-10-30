@@ -28,6 +28,7 @@
 		C885E94A1FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */; };
 		C885E94D1FA4B059006F1435 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */; };
 		C885E94E1FA4B059006F1435 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */; };
+		C88D27771FA749080025E6F8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88D27761FA749080025E6F8 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableBottomSheetViewController.xib; sourceTree = "<group>"; };
 		C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
+		C88D27761FA749080025E6F8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				C885E92F1FA44F24006F1435 /* DetailViewController.swift */,
 				C885E92D1FA44F24006F1435 /* MasterViewController.swift */,
 				C885E9471FA4AF81006F1435 /* ScrollableBottomSheetViewController.swift */,
+				C88D27761FA749080025E6F8 /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				C885E9491FA4AF82006F1435 /* ScrollableBottomSheetViewController.swift in Sources */,
 				C885E9461FA484DC006F1435 /* EventTableViewCell.swift in Sources */,
 				C885E92C1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld in Sources */,
+				C88D27771FA749080025E6F8 /* LoginViewController.swift in Sources */,
 				C885E9291FA44F24006F1435 /* AppDelegate.swift in Sources */,
 				C87CD9051FA6BADF005AB62A /* Comment.swift in Sources */,
 				C87CD9021FA6BADF005AB62A /* Location+CoreDataProperties.swift in Sources */,

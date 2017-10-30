@@ -24,6 +24,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             makeNetworkCall()
     }
     
+    // MARK: Data Populate Methods
     func makeNetworkCall(){
         showActivityIndicatory(uiView: self.view)
         networkCall.getAllEvents { (array, error) in
@@ -37,6 +38,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
+    //Reload Table data
+    @IBAction func reloadData(_ sender: Any) {
+        makeNetworkCall()
+    }
+    
+    // MARK: Activity indicator Methods
+    //Show Activity Indicator
     func showActivityIndicatory(uiView: UIView) {
         uiView.isUserInteractionEnabled = false
         container.frame = uiView.frame
@@ -60,12 +68,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         actInd.startAnimating()
     }
     
+    //Stop Activity Indicator
     func stopActivityIndicator(){
         self.view.isUserInteractionEnabled = true
         actInd.stopAnimating()
         container.removeFromSuperview()
     }
     
+    //MARK: Action Sheets Methods
+    //Show alert incase of no data from server
     func showAlert(){
         let actionSheet: UIAlertController = UIAlertController(title: "Error fetching information from Server", message: "", preferredStyle: .actionSheet)
         
@@ -87,6 +98,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    //Show alert incase of no data in CoreData
     func showAlert2(){
         let actionSheet: UIAlertController = UIAlertController(title: "Displaying Local Data", message: "Fetch data from Server?", preferredStyle: .actionSheet)
         
@@ -100,13 +112,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // MARK: - Segues
-    
+    //Transition to event details controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEvent" {
             let destinationVC = segue.destination as? DetailViewController
@@ -115,7 +122,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     // MARK: - Table View
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -158,11 +164,5 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         selectedEvent = eventArray.object(at: indexPath.row) as? Event
         performSegue(withIdentifier: "showEvent", sender: self)
     }
-    
-    @IBAction func reloadData(_ sender: Any) {
-        makeNetworkCall()
-    }
-    
-    
 }
 
