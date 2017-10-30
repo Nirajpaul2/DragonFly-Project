@@ -27,7 +27,6 @@ class NetworkCalls: NSObject {
             if (response.result.error == nil){
                 do {
                     if let convertedJsonIntoArray = try JSONSerialization.jsonObject(with: response.data!, options: []) as? NSArray {
-//                        self.saveEventsToCoreData(eventsArray: convertedJsonIntoArray)
                         completionHandler(convertedJsonIntoArray, nil)
                     }
                 } catch let error as NSError {
@@ -93,7 +92,6 @@ class NetworkCalls: NSObject {
             
             event.location = l
             
-            let commentEntityArray:NSSet = []
             let commentsArray = eventDictionary["comments"] as! NSArray
             
             for c in commentsArray{
@@ -106,18 +104,24 @@ class NetworkCalls: NSObject {
                 let com:Comment = Comment(entity: commentEntity, insertInto: managedContext)
                 com.from = temp["from"] as? String
                 com.text = temp["text"] as? String
-                commentEntityArray.adding(com)
+                com.event = event
+                com.id = event.id!
+                event.addToComment(com)
             }
-            
-            event.comment = commentEntityArray
             
             let imagesArray = eventDictionary["images"] as! NSArray
             if imagesArray.count != 0{
                 let imageDictionary:NSDictionary = imagesArray[0] as! NSDictionary
                 event.imageId = imageDictionary["id"] as? String
+                
+                getMediaForEvent(eventId: event.id!, mediaId: imageDictionary["id"] as! String, completionHandler: { (image) in
+                    event.image = NSData(data: UIImageJPEGRepresentation(image!, 1.0)!)
+                })
             }else{
                 event.imageId = ""
+                event.image = NSData(data: UIImageJPEGRepresentation(UIImage(named:"tempImage")!, 1.0)!)
             }
+            
             appDelegate.saveContext()
         }
         let array = fetchEventsFromCoreData()
@@ -137,7 +141,27 @@ class NetworkCalls: NSObject {
             
             let data = try managedContext.fetch(fetchRequest)
             results = NSArray(array: data)
-            print(results.count)
+        }catch{
+            print("error: \(error)")
+        }
+        return results
+    }
+    
+    func getCommentsForEvent(event:Event) -> NSArray{
+        var results:NSArray = []
+        
+        let fetchRequest:NSFetchRequest<Comment> = Comment.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format:"event == %@", event)
+        do{
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return results
+            }
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            
+            let data = try managedContext.fetch(fetchRequest)
+            results = NSArray(array: data)
         }catch{
             print("error: \(error)")
         }
@@ -165,6 +189,7 @@ class NetworkCalls: NSObject {
         } catch {
             print("error: \(error)")
         }
-        
     }
+    
+    
 }

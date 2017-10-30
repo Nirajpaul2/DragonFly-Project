@@ -189,7 +189,7 @@
                         <outlet property="eventLocation" destination="GjV-gr-bk8" id="csk-Wp-Swt"/>
                         <outlet property="eventName" destination="Cx8-OG-JXM" id="O9f-cu-WOl"/>
                         <outlet property="mapVIew" destination="dGu-eb-qT5" id="cZJ-bG-crz"/>
-                        <outlet property="respondToEvent" destination="M7o-Y6-f66" id="WFi-Om-iR1"/>
+                        <outlet property="respondToEvent" destination="M7o-Y6-f66" id="Kwc-df-tc2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>

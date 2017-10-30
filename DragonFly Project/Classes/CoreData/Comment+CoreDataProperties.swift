@@ -2,7 +2,7 @@
 //  Comment+CoreDataProperties.swift
 //  DragonFly Project
 //
-//  Created by Aditya Emani on 10/29/17.
+//  Created by Aditya Emani on 10/30/17.
 //  Copyright © 2017 Aditya Emani. All rights reserved.
 //
 //
@@ -19,6 +19,7 @@ extension Comment {
 
     @NSManaged public var from: String?
     @NSManaged public var text: String?
+    @NSManaged public var id: String
     @NSManaged public var event: Event?
 
 }

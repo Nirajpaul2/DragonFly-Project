@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
     let eventStore = EKEventStore()
     var calendar: EKCalendar!
     var locationString:String = ""
+    let networkCall = NetworkCalls()
     
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventDescription: UITextView!
@@ -28,11 +29,16 @@ class DetailViewController: UIViewController {
     
     func configureView() {
         // Update the user interface for the detail item.
-            
-//        eventImageView.image = UIImage(data: (event?.image! as! NSData) as Data)
         
-        eventImageView.image = UIImage(named:"tempImage")!
-        
+        if (event?.image != nil) {
+            if let image = UIImage(data: (event?.image!)! as Data){
+                eventImageView.image = image
+            }else{
+                eventImageView.image = UIImage(named:"tempImage")!
+            }
+        }else{
+            eventImageView.image = UIImage(named:"tempImage")!
+        }
             eventName.text = event?.name
             eventDescription.text = event?.eventDescription
         
@@ -51,9 +57,10 @@ class DetailViewController: UIViewController {
             loadMapView(locationString: state)
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         configureView()
     }
     
@@ -64,7 +71,7 @@ class DetailViewController: UIViewController {
         self.view.addSubview(bottomSheetVC.view)
         bottomSheetVC.didMove(toParentViewController: self)
         
-        bottomSheetVC.commentsArray = event?.comment?.allObjects
+        bottomSheetVC.commentsArray = networkCall.getCommentsForEvent(event: event!)
         
         let height = view.frame.height
         let width  = view.frame.width

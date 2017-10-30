@@ -21,8 +21,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewDidLoad()
         
         eventArray = networkCall.fetchEventsFromCoreData()
-        if eventArray.count == 0 {
-            networkCall.getAllEvents { (array, error) in
+        self.tableView.reloadData()
+        networkCall.getAllEvents { (array, error) in
                 if array?.count == 0{
                     
                 }else{
@@ -32,9 +32,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                     })
                 }
             }
-        }else{
-            self.tableView.reloadData()
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,19 +68,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let image = UIImage(data: (event.image! as NSData) as Data){
                 cell.eventImageView.image = image
             }else{
-                print("Came Here")
                 cell.eventImageView.image = UIImage(named:"tempImage")!
             }
         }else{
-            if event.imageId != ""{
-//                networkCall.getMediaForEvent(eventId: event.id!, mediaId: event.imageId!, completionHandler: { (eventImage) in
-//                    event.image = UIImageJPEGRepresentation(eventImage!, 1)! as NSData
-//                })
                 cell.eventImageView.image = UIImage(named:"tempImage")!
-            }else{
-                cell.eventImageView.image = UIImage(named:"tempImage")!
-            }
-            
         }
         
         cell.eventName.text = event.name
@@ -102,6 +90,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedEvent = eventArray.object(at: indexPath.row) as? Event
+        print(selectedEvent?.comment as Any)
         performSegue(withIdentifier: "showEvent", sender: self)
     }
 }
