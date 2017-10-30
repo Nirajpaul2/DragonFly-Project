@@ -16,22 +16,97 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var eventArray:NSArray = []
     var selectedEvent:Event?
     let networkCall = NetworkCalls()
+    let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+    let container: UIView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.eventArray = networkCall.fetchEventsFromCoreData()
         
-        eventArray = networkCall.fetchEventsFromCoreData()
-        self.tableView.reloadData()
+        if self.eventArray.count == 0 {
+            makeNetworkCall()
+        }else{
+            self.tableView.reloadData()
+            showAlert2()
+        }
+    }
+    
+    func makeNetworkCall(){
+        showActivityIndicatory(uiView: self.view)
         networkCall.getAllEvents { (array, error) in
-                if array?.count == 0{
-                    
-                }else{
-                    self.networkCall.saveEventsToCoreData(eventsArray: array!, completionHandler: { (coreDataEvents) in
-                        self.eventArray = coreDataEvents!
-                        self.tableView.reloadData()
-                    })
-                }
+            self.stopActivityIndicator()
+            if array?.count == 0{
+                self.showAlert()
+            }else{
+                self.networkCall.saveEventsToCoreData(eventsArray: array!, completionHandler: { (coreDataEvents) in
+                    self.eventArray = coreDataEvents!
+                    self.tableView.reloadData()
+                })
             }
+        }
+    }
+    
+    func showActivityIndicatory(uiView: UIView) {
+        uiView.isUserInteractionEnabled = false
+        container.frame = uiView.frame
+        container.center = uiView.center
+        container.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.3)
+        
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = uiView.center
+        loadingView.backgroundColor = UIColor(red:0.27, green:0.27, blue:0.27, alpha:0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        actInd.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        actInd.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+        loadingView.addSubview(actInd)
+        container.addSubview(loadingView)
+        uiView.addSubview(container)
+        actInd.startAnimating()
+    }
+    
+    func stopActivityIndicator(){
+        self.view.isUserInteractionEnabled = true
+        actInd.stopAnimating()
+        container.removeFromSuperview()
+    }
+    
+    func showAlert(){
+        let actionSheet: UIAlertController = UIAlertController(title: "Error fetching information from Server", message: "", preferredStyle: .actionSheet)
+        
+        let one = UIAlertAction(title: "Try again?", style: .default) { _ in
+                self.makeNetworkCall()
+        }
+        actionSheet.addAction(one)
+        
+        let two = UIAlertAction(title: "Load Offline Data", style: .default)
+        { _ in
+            self.eventArray = self.networkCall.fetchEventsFromCoreData()
+            if self.eventArray.count == 0 {
+                self.makeNetworkCall()
+            }else{
+                self.tableView.reloadData()
+            }
+        }
+        actionSheet.addAction(two)
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func showAlert2(){
+        let actionSheet: UIAlertController = UIAlertController(title: "Displaying Local Data", message: "Fetch data from Server?", preferredStyle: .actionSheet)
+        
+        let one = UIAlertAction(title: "Yes", style: .default) { _ in
+            self.makeNetworkCall()
+        }
+        actionSheet.addAction(one)
+        
+        let two = UIAlertAction(title: "No", style: .cancel)
+        actionSheet.addAction(two)
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,11 +141,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
         if (event.image != nil) {
             if let image = UIImage(data: (event.image! as NSData) as Data){
+                stopActivityIndicator()
                 cell.eventImageView.image = image
             }else{
                 cell.eventImageView.image = UIImage(named:"tempImage")!
             }
         }else{
+            showActivityIndicatory(uiView: cell.imageView!)
                 cell.eventImageView.image = UIImage(named:"tempImage")!
         }
         
@@ -90,7 +167,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedEvent = eventArray.object(at: indexPath.row) as? Event
-        print(selectedEvent?.comment as Any)
         performSegue(withIdentifier: "showEvent", sender: self)
     }
 }

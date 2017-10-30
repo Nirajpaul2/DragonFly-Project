@@ -191,5 +191,61 @@ class NetworkCalls: NSObject {
         }
     }
     
+    func getStatusOfEvent(eventId:String,completionHandler: @escaping (NSString?, NSError?) -> ()){
+        let urlPath:String = APIROOT + "events/\(eventId)/status/anything)"
+        Alamofire.request(urlPath, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).authenticate(user: username, password: password).responseJSON{response in
+            if (response.result.error == nil){
+                do {
+                    print(response.result.description as Any)
+                    completionHandler("success", nil)
+                }
+            }else{
+                print("error")
+                completionHandler("error", response.result.error as NSError?)
+            }
+        }
+    }
     
+    func putStatusOfEvent(eventId:String,status:Bool,completionHandler: @escaping (NSString?, NSError?) -> ()){
+        let urlPath:String = APIROOT + "events/\(eventId)/status/anything)"
+        var param = Dictionary<String, Bool>()
+        param["coming"] = status
+        Alamofire.request(urlPath, method: .put, parameters: param, encoding: URLEncoding.default, headers: nil).authenticate(user: username, password: password).responseJSON{response in
+            if (response.result.error == nil){
+                do {
+                    completionHandler("success", nil)
+                }
+            }else{
+                print("error")
+                completionHandler("fail", response.result.error as NSError?)
+            }
+        }
+    }
+    
+    func updateStatusForEvent(eventId:String,status:Bool){
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+        
+        do{
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return
+            }
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            
+            let fetchedResults = try managedContext.fetch(fetchRequest)
+            if fetchedResults.count != 0 {
+                
+                for event:Event in (fetchedResults as? [Event])!{
+                    if event.id == eventId{
+                        event.status = status
+                        appDelegate.saveContext()
+                    }
+                }
+            }
+        }catch{
+            print("error: \(error)")
+        }
+    }
 }

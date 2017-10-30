@@ -28,8 +28,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var respondToEvent: UIButton!
     
     func configureView() {
-        // Update the user interface for the detail item.
-        
         if (event?.image != nil) {
             if let image = UIImage(data: (event?.image!)! as Data){
                 eventImageView.image = image
@@ -39,22 +37,33 @@ class DetailViewController: UIViewController {
         }else{
             eventImageView.image = UIImage(named:"tempImage")!
         }
-            eventName.text = event?.name
-            eventDescription.text = event?.eventDescription
+        eventName.text = event?.name
+        eventDescription.text = event?.eventDescription
         
         let location:Location = (event?.location)!
-            
+        
         let name:String = location.name!
         let address:String = location.address!
         let city:String = location.city!
         let state:String = location.state!
-            
-            locationString = "\(name), \(address), \(city), \(state)"
-            eventLocation.text = locationString
-            
-            eventDate.text = "10-02-2017"
-            addBottomSheetView()
-            loadMapView(locationString: state)
+        
+        locationString = "\(name), \(address), \(city), \(state)"
+        eventLocation.text = locationString
+        
+        eventDate.text = "10-02-2017"
+        addBottomSheetView()
+        loadMapView(locationString: state)
+        if (event?.status)!{
+            respondToEvent.isEnabled = false
+            self.respondToEvent.setTitle("Attending",for: .normal)
+        }else{
+            self.respondToEvent.setTitle("Respond",for: .normal)
+        }
+        
+        self.networkCall.getStatusOfEvent(eventId: (self.event?.id)!, completionHandler: { (responseStatus, error) in
+            print("Sent")
+        })
+        
     }
     
     
@@ -82,18 +91,18 @@ class DetailViewController: UIViewController {
         let geoCoder = CLGeocoder()
         
         geoCoder.geocodeAddressString(locationString) { (placeMarkArray, error) in
-            let placeMark = placeMarkArray![0]
-            
-            let region = MKCoordinateRegionMakeWithDistance((placeMark.location?.coordinate)!, 800, 800)
-            
-            self.mapVIew.setRegion(self.mapVIew.regionThatFits(region), animated: true)
-            
-            // Add an annotation
-            let point = MKPointAnnotation()
-            point.coordinate = (placeMark.location?.coordinate)!
-            point.title = placeMark.name
-            
-            self.mapVIew.addAnnotation(point)
+            if let placeMark = placeMarkArray?[0]{
+                let region = MKCoordinateRegionMakeWithDistance((placeMark.location?.coordinate)!, 800, 800)
+                
+                self.mapVIew.setRegion(self.mapVIew.regionThatFits(region), animated: true)
+                
+                // Add an annotation
+                let point = MKPointAnnotation()
+                point.coordinate = (placeMark.location?.coordinate)!
+                point.title = placeMark.name
+                
+                self.mapVIew.addAnnotation(point)
+            }
         }
     }
     
@@ -183,7 +192,25 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func respondToEvent(_ sender: Any) {
+        let actionSheet: UIAlertController = UIAlertController(title: "Would you like to Attend Event?", message: event?.name, preferredStyle: .actionSheet)
         
+        let yes = UIAlertAction(title: "Yes", style: .default) { _ in
+            self.networkCall.updateStatusForEvent(eventId: (self.event?.id)!, status:true)
+            self.networkCall.putStatusOfEvent(eventId: (self.event?.id)!, status: true, completionHandler: { (status, error) in
+                self.respondToEvent.setTitle("Attending",for: .normal);             self.respondToEvent.isEnabled = false
+            })
+        }
+        actionSheet.addAction(yes)
+        
+        let no = UIAlertAction(title: "No", style: .default)
+        { _ in
+            self.networkCall.updateStatusForEvent(eventId: (self.event?.id)!, status:false)
+            self.networkCall.putStatusOfEvent(eventId: (self.event?.id)!, status: false, completionHandler: { (status, error) in
+            })
+        }
+        actionSheet.addAction(no)
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
 }
 
