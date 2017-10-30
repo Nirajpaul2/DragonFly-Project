@@ -342,7 +342,13 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Events" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Events" id="Zdf-7t-Un8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="fSz-XC-w0c">
+                            <connections>
+                                <action selector="reloadData:" destination="7bK-jq-Zjz" id="4bo-5A-4qj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="JEX-9P-axG" kind="show" identifier="showEvent" id="Z7S-RE-YFA"/>
                     </connections>

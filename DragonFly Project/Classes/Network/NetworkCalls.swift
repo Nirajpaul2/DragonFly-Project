@@ -27,10 +27,13 @@ class NetworkCalls: NSObject {
             if (response.result.error == nil){
                 do {
                     if let convertedJsonIntoArray = try JSONSerialization.jsonObject(with: response.data!, options: []) as? NSArray {
-                        completionHandler(convertedJsonIntoArray, nil)
+                        self.saveEventsToCoreData(eventsArray: convertedJsonIntoArray, completionHandler: { (array) in
+                            completionHandler(array, nil)
+                        })
                     }
                 } catch let error as NSError {
                     print(error.localizedDescription)
+                    completionHandler([], error as NSError?)
                 }
             }else{
                 print("error")
@@ -56,6 +59,7 @@ class NetworkCalls: NSObject {
     func saveEventsToCoreData(eventsArray:NSArray,completionHandler: @escaping (NSArray?) -> ()){
         
         deleteAllDataFromCoreData()
+        
         for singleEvent in eventsArray{
             let eventDictionary = singleEvent as! NSDictionary
             guard let appDelegate =
@@ -123,9 +127,12 @@ class NetworkCalls: NSObject {
             }
             
             appDelegate.saveContext()
+            let lastEvent = eventsArray.lastObject as! NSDictionary
+            if event.id == lastEvent["id"] as? String{
+                let array = fetchEventsFromCoreData()
+                completionHandler(array)
+            }
         }
-        let array = fetchEventsFromCoreData()
-        completionHandler(array)
     }
     
     func fetchEventsFromCoreData() -> NSArray{

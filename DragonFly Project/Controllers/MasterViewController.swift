@@ -21,14 +21,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.eventArray = networkCall.fetchEventsFromCoreData()
-        
-        if self.eventArray.count == 0 {
             makeNetworkCall()
-        }else{
-            self.tableView.reloadData()
-            showAlert2()
-        }
     }
     
     func makeNetworkCall(){
@@ -38,10 +31,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if array?.count == 0{
                 self.showAlert()
             }else{
-                self.networkCall.saveEventsToCoreData(eventsArray: array!, completionHandler: { (coreDataEvents) in
-                    self.eventArray = coreDataEvents!
+                self.eventArray = array!
                     self.tableView.reloadData()
-                })
             }
         }
     }
@@ -141,13 +132,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
         if (event.image != nil) {
             if let image = UIImage(data: (event.image! as NSData) as Data){
-                stopActivityIndicator()
                 cell.eventImageView.image = image
             }else{
                 cell.eventImageView.image = UIImage(named:"tempImage")!
             }
         }else{
-            showActivityIndicatory(uiView: cell.imageView!)
                 cell.eventImageView.image = UIImage(named:"tempImage")!
         }
         
@@ -169,5 +158,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         selectedEvent = eventArray.object(at: indexPath.row) as? Event
         performSegue(withIdentifier: "showEvent", sender: self)
     }
+    
+    @IBAction func reloadData(_ sender: Any) {
+        makeNetworkCall()
+    }
+    
+    
 }
 

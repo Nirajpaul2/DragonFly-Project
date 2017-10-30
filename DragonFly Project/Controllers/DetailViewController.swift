@@ -61,12 +61,8 @@ class DetailViewController: UIViewController {
         }
         
         self.networkCall.getStatusOfEvent(eventId: (self.event?.id)!, completionHandler: { (responseStatus, error) in
-            print("Sent")
         })
-        
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -198,6 +194,13 @@ class DetailViewController: UIViewController {
             self.networkCall.updateStatusForEvent(eventId: (self.event?.id)!, status:true)
             self.networkCall.putStatusOfEvent(eventId: (self.event?.id)!, status: true, completionHandler: { (status, error) in
                 self.respondToEvent.setTitle("Attending",for: .normal);             self.respondToEvent.isEnabled = false
+                
+                let acs: UIAlertController = UIAlertController(title: "Update saved to local database", message: "Error saving to server, we will try to save your update in background", preferredStyle: .actionSheet)
+                
+                let ok = UIAlertAction(title: "Ok", style: .cancel)
+                acs.addAction(ok)
+                
+                self.present(acs, animated: true, completion: nil)
             })
         }
         actionSheet.addAction(yes)
