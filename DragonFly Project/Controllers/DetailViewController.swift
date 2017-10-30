@@ -12,8 +12,7 @@ import EventKit
 
 class DetailViewController: UIViewController {
     
-    var event:NSDictionary = NSDictionary()
-    var eventImage:UIImage = UIImage()
+    var event:Event?
     var eventId:NSString = ""
     let eventStore = EKEventStore()
     var calendar: EKCalendar!
@@ -29,22 +28,20 @@ class DetailViewController: UIViewController {
     
     func configureView() {
         // Update the user interface for the detail item.
-        if event.allKeys.count == 0 {
-            self.view.isHidden = true
-        }else{
-            self.view.isHidden = false
             
-            eventImageView.image = eventImage
+//        eventImageView.image = UIImage(data: (event?.image! as! NSData) as Data)
+        
+        eventImageView.image = UIImage(named:"tempImage")!
+        
+            eventName.text = event?.name
+            eventDescription.text = event?.eventDescription
+        
+        let location:Location = (event?.location)!
             
-            eventName.text = event["name"] as? String
-            eventDescription.text = event["description"] as! String
-            
-            let location:NSDictionary = event["location"] as! NSDictionary
-            
-            let name:String = (location["name"] as? String)!
-            let address:String = (location["address"] as? String)!
-            let city:String = (location["city"] as? String)!
-            let state:String = (location["state"] as? String)!
+        let name:String = location.name!
+        let address:String = location.address!
+        let city:String = location.city!
+        let state:String = location.state!
             
             locationString = "\(name), \(address), \(city), \(state)"
             eventLocation.text = locationString
@@ -52,7 +49,6 @@ class DetailViewController: UIViewController {
             eventDate.text = "10-02-2017"
             addBottomSheetView()
             loadMapView(locationString: state)
-        }
     }
     
     override func viewDidLoad() {
@@ -68,7 +64,7 @@ class DetailViewController: UIViewController {
         self.view.addSubview(bottomSheetVC.view)
         bottomSheetVC.didMove(toParentViewController: self)
         
-        bottomSheetVC.commentsArray = event["comments"] as! NSArray
+        bottomSheetVC.commentsArray = event?.comment?.allObjects
         
         let height = view.frame.height
         let width  = view.frame.width
@@ -128,18 +124,15 @@ class DetailViewController: UIViewController {
         
         newEvent.calendar = getCalendar()
         
-        newEvent.title = event["name"] as? String
+        newEvent.title = event?.name
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = (event["date"] as! String)
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        let dateString = "10-02-2017"
         
-        let dateSubstring = dateString.split(separator: "T", maxSplits: 3, omittingEmptySubsequences: true)
-//        let date = dateFormatter.date(from: dateSubstring.s)
+        newEvent.startDate = dateFormatter.date(from: dateString)
+        newEvent.endDate = dateFormatter.date(from: dateString)
         
-        print(dateSubstring as Any)
-//        newEvent.startDate = date
-//        newEvent.endDate = date
         newEvent.isAllDay = true
         
         newEvent.location = locationString

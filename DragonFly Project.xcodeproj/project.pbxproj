@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		5428799B8864EABD5F5F26EA /* Pods_DragonFly_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6738E16DE73BF28E1685169 /* Pods_DragonFly_Project.framework */; };
+		C87CD9011FA6BADF005AB62A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD8FB1FA6BADF005AB62A /* Location.swift */; };
+		C87CD9021FA6BADF005AB62A /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD8FC1FA6BADF005AB62A /* Location+CoreDataProperties.swift */; };
+		C87CD9031FA6BADF005AB62A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD8FD1FA6BADF005AB62A /* Event.swift */; };
+		C87CD9041FA6BADF005AB62A /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD8FE1FA6BADF005AB62A /* Event+CoreDataProperties.swift */; };
+		C87CD9051FA6BADF005AB62A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD8FF1FA6BADF005AB62A /* Comment.swift */; };
+		C87CD9061FA6BADF005AB62A /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD9001FA6BADF005AB62A /* Comment+CoreDataProperties.swift */; };
+		C87CD9101FA6F1F0005AB62A /* EventClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CD90F1FA6F1F0005AB62A /* EventClass.swift */; };
 		C885E9291FA44F24006F1435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E9281FA44F24006F1435 /* AppDelegate.swift */; };
 		C885E92C1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C885E92A1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld */; };
 		C885E92E1FA44F24006F1435 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C885E92D1FA44F24006F1435 /* MasterViewController.swift */; };
@@ -28,6 +35,13 @@
 		492811FAC150FB3CE3B3E2AB /* Pods-DragonFly Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DragonFly Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project.release.xcconfig"; sourceTree = "<group>"; };
 		658C6740A768A348B02744C9 /* Pods-DragonFly Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DragonFly Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DragonFly Project/Pods-DragonFly Project.debug.xcconfig"; sourceTree = "<group>"; };
 		A6738E16DE73BF28E1685169 /* Pods_DragonFly_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DragonFly_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C87CD8FB1FA6BADF005AB62A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		C87CD8FC1FA6BADF005AB62A /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C87CD8FD1FA6BADF005AB62A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		C87CD8FE1FA6BADF005AB62A /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C87CD8FF1FA6BADF005AB62A /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		C87CD9001FA6BADF005AB62A /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C87CD90F1FA6F1F0005AB62A /* EventClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventClass.swift; sourceTree = "<group>"; };
 		C885E9251FA44F24006F1435 /* DragonFly Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DragonFly Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C885E9281FA44F24006F1435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C885E92B1FA44F24006F1435 /* DragonFly_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DragonFly_Project.xcdatamodel; sourceTree = "<group>"; };
@@ -67,6 +81,76 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C87CD8E91FA6B4AC005AB62A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C885E9451FA484DC006F1435 /* EventTableViewCell.swift */,
+				C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */,
+				C885E92F1FA44F24006F1435 /* DetailViewController.swift */,
+				C885E92D1FA44F24006F1435 /* MasterViewController.swift */,
+				C885E9471FA4AF81006F1435 /* ScrollableBottomSheetViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C87CD8EA1FA6B4B3005AB62A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C885E9361FA44F24006F1435 /* LaunchScreen.storyboard */,
+				C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */,
+				C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */,
+				C885E9311FA44F24006F1435 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C87CD8EB1FA6B4BD005AB62A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C885E92A1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C87CD8EC1FA6B519005AB62A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C87CD9081FA6C5E6005AB62A /* Network */,
+				C87CD9071FA6C5D8005AB62A /* CoreData */,
+				C87CD9151FA6F216005AB62A /* DataClasses */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C87CD9071FA6C5D8005AB62A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C87CD8FB1FA6BADF005AB62A /* Location.swift */,
+				C87CD8FC1FA6BADF005AB62A /* Location+CoreDataProperties.swift */,
+				C87CD8FD1FA6BADF005AB62A /* Event.swift */,
+				C87CD8FE1FA6BADF005AB62A /* Event+CoreDataProperties.swift */,
+				C87CD8FF1FA6BADF005AB62A /* Comment.swift */,
+				C87CD9001FA6BADF005AB62A /* Comment+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		C87CD9081FA6C5E6005AB62A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C885E9411FA45540006F1435 /* NetworkCalls.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C87CD9151FA6F216005AB62A /* DataClasses */ = {
+			isa = PBXGroup;
+			children = (
+				C87CD90F1FA6F1F0005AB62A /* EventClass.swift */,
+			);
+			path = DataClasses;
+			sourceTree = "<group>";
+		};
 		C885E91C1FA44F24006F1435 = {
 			isa = PBXGroup;
 			children = (
@@ -89,20 +173,13 @@
 		C885E9271FA44F24006F1435 /* DragonFly Project */ = {
 			isa = PBXGroup;
 			children = (
-				C885E9471FA4AF81006F1435 /* ScrollableBottomSheetViewController.swift */,
-				C885E9481FA4AF82006F1435 /* ScrollableBottomSheetViewController.xib */,
+				C87CD8EC1FA6B519005AB62A /* Classes */,
+				C87CD8EB1FA6B4BD005AB62A /* Model */,
+				C87CD8EA1FA6B4B3005AB62A /* View */,
+				C87CD8E91FA6B4AC005AB62A /* Controllers */,
 				C885E9281FA44F24006F1435 /* AppDelegate.swift */,
-				C885E92D1FA44F24006F1435 /* MasterViewController.swift */,
-				C885E92F1FA44F24006F1435 /* DetailViewController.swift */,
-				C885E9311FA44F24006F1435 /* Main.storyboard */,
 				C885E9341FA44F24006F1435 /* Assets.xcassets */,
-				C885E9361FA44F24006F1435 /* LaunchScreen.storyboard */,
 				C885E9391FA44F24006F1435 /* Info.plist */,
-				C885E92A1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld */,
-				C885E9411FA45540006F1435 /* NetworkCalls.swift */,
-				C885E9451FA484DC006F1435 /* EventTableViewCell.swift */,
-				C885E94B1FA4B059006F1435 /* CommentsTableViewCell.swift */,
-				C885E94C1FA4B059006F1435 /* CommentsTableViewCell.xib */,
 			);
 			path = "DragonFly Project";
 			sourceTree = "<group>";
@@ -255,10 +332,17 @@
 				C885E9461FA484DC006F1435 /* EventTableViewCell.swift in Sources */,
 				C885E92C1FA44F24006F1435 /* DragonFly_Project.xcdatamodeld in Sources */,
 				C885E9291FA44F24006F1435 /* AppDelegate.swift in Sources */,
+				C87CD9051FA6BADF005AB62A /* Comment.swift in Sources */,
+				C87CD9021FA6BADF005AB62A /* Location+CoreDataProperties.swift in Sources */,
+				C87CD9061FA6BADF005AB62A /* Comment+CoreDataProperties.swift in Sources */,
 				C885E92E1FA44F24006F1435 /* MasterViewController.swift in Sources */,
+				C87CD9041FA6BADF005AB62A /* Event+CoreDataProperties.swift in Sources */,
 				C885E9301FA44F24006F1435 /* DetailViewController.swift in Sources */,
+				C87CD9011FA6BADF005AB62A /* Location.swift in Sources */,
+				C87CD9031FA6BADF005AB62A /* Event.swift in Sources */,
 				C885E9421FA45540006F1435 /* NetworkCalls.swift in Sources */,
 				C885E94D1FA4B059006F1435 /* CommentsTableViewCell.swift in Sources */,
+				C87CD9101FA6F1F0005AB62A /* EventClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

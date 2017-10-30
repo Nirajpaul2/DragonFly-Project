@@ -18,7 +18,7 @@ class ScrollableBottomSheetViewController: UIViewController {
         return UIScreen.main.bounds.height - 50
     }
     
-    var commentsArray:NSArray = NSArray()
+    var commentsArray:[Any]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +102,7 @@ extension ScrollableBottomSheetViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentsArray.count
+        return commentsArray!.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -111,10 +111,11 @@ extension ScrollableBottomSheetViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentsCell", for: indexPath) as! CommentsTableViewCell
-        let comment:NSDictionary = commentsArray[indexPath.row] as! NSDictionary
+        let comment:Comment = commentsArray![indexPath.row] as! Comment
         
-        cell.userName.text = (comment["from"] as! String)
-        cell.commentText.text = (comment["text"] as! String)
+        cell.userName.text = comment.from
+        cell.commentText.text = comment.text
+        
         return cell
     }
 }
